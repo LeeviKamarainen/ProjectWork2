@@ -215,8 +215,8 @@ import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
           <ArrowDownwardIcon/></ToggleButton>
         </ToggleButtonGroup>
 
-        <p>{vote}</p>
-        <p>{date}</p>
+        <p>VOTES: {vote}</p>
+        <p>Last edited: {date}</p>
         <Button variant="contained" 
         sx={{
           backgroundColor: "inherit+1",
@@ -229,7 +229,7 @@ import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
           >Show comments:</Button>
         {open ? // Handles opening the comments and closing them.
         data.comments.map((p,index) => 
-        <Comment key={"comment_"+index} data={data} user={user} jwt={jwt} setJwt={setJwt} posts={posts} setPosts={setPosts} p={p} index={index} postindex={postindex}></Comment>
+        <Comment key={"comment_"+index} data={data} user={user} jwt={jwt} setJwt={setJwt} posts={posts} setPosts={setPosts} p={p} index={index} postindex={postindex} setOpen={setOpen}></Comment>
         )
           : null
       }

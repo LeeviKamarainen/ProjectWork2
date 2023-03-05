@@ -8,13 +8,12 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import TextField from '@mui/material/TextField'
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import Button from '@mui/material/Button';
-function Comment({data, user,jwt,setJwt, posts, setPosts, p, index,postindex}) {
+function Comment({data, user,jwt,setJwt, posts, setPosts, p, index,postindex, setOpen}) {
     const [commentvote, setCommentvote] = useState(data.comments[index].likes.votes.reduce((partialSum, a) => partialSum + a, 0)); 
     const [commentSelected, setCommentselected] = useState(data.comments[index].likes.votes[data.comments[index].likes.users.indexOf(user.id)]); // Set the states of upvotes for specific users. If they have selected a vote, it will be shown as it selected.
     const [date, setDate] = useState(data.comments[index].edited);
     let adminID = "61646d696e31323334353637"; // Id of the admin account used to check for admin actions. 
     const [text, setText] = useState('');
-    
   
 
     const voteComment = (e, newSelected, index) => {
@@ -108,6 +107,7 @@ function Comment({data, user,jwt,setJwt, posts, setPosts, p, index,postindex}) {
               .then(json => {
                 console.log(json)
                 setPosts(json)
+                setOpen(false) //Close the comment window when the comment is deleted.
               })
             }
 
@@ -127,7 +127,7 @@ function Comment({data, user,jwt,setJwt, posts, setPosts, p, index,postindex}) {
     >
 
     <p> User: {p.user} </p>
-    {(data.userid == user.id  || user.id==adminID) ? <TextField // Users can edit own posts and admin can edit all posts
+    {(data.comments[index].userid  == user.id  || user.id==adminID) ? <TextField // Users can edit own posts and admin can edit all posts
         id="outlined-multiline-flexible"
         sx={{
           position: "inherit",
