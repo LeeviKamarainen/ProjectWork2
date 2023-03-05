@@ -26,7 +26,7 @@ const Login = ({setJwt,setUser,jwt}) => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            if(data.token) {
+            if(data.token) { // Redirect the user to main page after logging in. Also set the token to local storage if succesfull login.
                 localStorage.setItem('jwt_token',data.token)
                 localStorage.setItem('jwt_user', JSON.parse(Buffer.from(data.token.split(".")[1], "base64").toString()))
                 setUser(JSON.parse(Buffer.from(data.token.split(".")[1], "base64").toString()))
@@ -37,12 +37,13 @@ const Login = ({setJwt,setUser,jwt}) => {
     }
 
   return (
+    // Login form with 3 inputs.
     <div className='App'>
-         <h2>Login</h2>
+         <h2>Login</h2> 
         <form onChange={handleChange} onSubmit={submit}>
             <input type="text" name="username"></input>
             <input type="password" name="password"></input>
-            <input type="submit"></input>
+            <input type="submit" value="SUBMIT"></input>
 
         </form>
     </div>

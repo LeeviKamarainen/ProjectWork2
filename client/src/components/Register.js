@@ -25,21 +25,21 @@ const Register = ({setJwt,setUser,jwt}) => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            if(data.token) {
-                setJwt(data.token)
-                setUser(JSON.parse(Buffer.from(data.token.split(".")[1], "base64").toString()))
+            if(data.user) {
+            window.location.href='/users/login' // Redirect user if succesfull register
             }
         })
 
     }
 
   return (
+    // Register form.
     <div className='App'>
          <h2>Register</h2>
         <form onChange={handleChange} onSubmit={submit}>
             <input type="text" name="username"></input>
             <input type="password" name="password"></input>
-            <input type="submit"></input>
+            <input type="submit" value="SUBMIT"></input>
 
         </form>
     </div>
